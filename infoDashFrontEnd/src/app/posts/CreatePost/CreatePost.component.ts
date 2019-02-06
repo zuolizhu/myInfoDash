@@ -1,16 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { Post } from '../../posts/post.model';
 
 @Component({
     selector: 'app-CreatePost',
-    templateUrl: './CreatePost.component.html'
+    templateUrl: './CreatePost.component.html',
+    styleUrls: ['./CreatePost.component.css']
 })
 export class CreatePostComponent {
-    newPost = '';
-
     // Two way binding
-    postInput = '';
-    
+    infoTitle = '';
+    infoBody = '';
+    @Output() infoCreated = new EventEmitter<Post>();
+
     addPost() {
-        this.newPost = this.postInput;
+        const post: Post = {
+            title: this.infoTitle, 
+            content: this.infoBody
+        };
+        this.infoCreated.emit(post);
     }
 }

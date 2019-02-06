@@ -1,2 +1,5 @@
-<h1>Info Dash</h1>
-<app-CreatePost></app-CreatePost>
+<app-header></app-header>
+<main>
+    <app-CreatePost (infoCreated)="onPostAdded($event)"></app-CreatePost>
+    <app-ListPost [posts]="savedInfos"></app-ListPost>
+</main>
