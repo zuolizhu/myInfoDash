@@ -24,5 +24,6 @@ export class CreatePostComponent {
             content: form.value.infoBody
         };
         this.postsService.addPost(post);
+        form.resetForm();
     }
 }
