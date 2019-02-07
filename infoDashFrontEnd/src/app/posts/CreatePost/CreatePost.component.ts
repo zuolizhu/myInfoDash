@@ -20,6 +20,7 @@ export class CreatePostComponent {
             return;
         }
         const post: Post = {
+            id: null,
             title: form.value.infoTitle, 
             content: form.value.infoBody
         };

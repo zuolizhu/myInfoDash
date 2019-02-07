@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { CreatePostComponent } from './posts/CreatePost/CreatePost.component';
 import { HeaderComponent } from './header/header.component';
 import { ListPostComponent } from './posts/ListPost/ListPost.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ListPostComponent } from './posts/ListPost/ListPost.component';
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
