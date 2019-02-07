@@ -14,6 +14,7 @@ import { CreatePostComponent } from './posts/CreatePost/CreatePost.component';
 import { HeaderComponent } from './header/header.component';
 import { ListPostComponent } from './posts/ListPost/ListPost.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './appRouting.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     NoopAnimationsModule,
     MatInputModule,

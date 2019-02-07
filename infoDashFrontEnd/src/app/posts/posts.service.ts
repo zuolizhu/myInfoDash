@@ -41,9 +41,9 @@ export class PostsService {
         this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
         .subscribe((resData) => {
             // Update the id while creating the post
+            // the
             const id = resData.postId;
             post.id = id;
-
             this.posts.push(post);
             this.postsUpdated.next([...this.posts]);
         });
