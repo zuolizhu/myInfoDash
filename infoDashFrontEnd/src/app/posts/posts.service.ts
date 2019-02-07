@@ -38,11 +38,23 @@ export class PostsService {
     }
 
     addPost(post: Post) {
-        this.http.post<{message: string}>('http://localhost:3000/api/posts', post)
+        this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
         .subscribe((resData) => {
-            console.log(resData.message);
+            // Update the id while creating the post
+            const id = resData.postId;
+            post.id = id;
+
             this.posts.push(post);
             this.postsUpdated.next([...this.posts]);
         });
+    }
+
+    removePost(postId: string) {
+        this.http.delete('http://localhost:3000/api/posts/' + postId)
+        .subscribe(() => {
+            const updatedPosts = this.posts.filter(post => post.id !== postId);
+            this.posts = updatedPosts;
+            this.postsUpdated.next([...this.posts]);
+        })
     }
 }
