@@ -8,7 +8,7 @@ const Post = require('./models/post');
 const app = express();
 
 // Cloud DB connection config
-mongoose.connect('mongodb+srv://goodtogo:1xivK8fPx59jyIYI@meanapp-ewu5f.mongodb.net/test?retryWrites=true', {useNewUrlParser: true})
+mongoose.connect('mongodb+srv://goodtogo:1xivK8fPx59jyIYI@meanapp-ewu5f.mongodb.net/meanApp?retryWrites=true', {useNewUrlParser: true})
 .then(() => {
     console.log("Connected to cloud DB!");
 }).catch(() => {
@@ -34,28 +34,22 @@ app.post("/api/posts", (req, res, next) => {
         title: req.body.title,
         content: req.body.content
     });
-    console.log(post);
+    // Save created post into cloud DB
+    post.save();
+
     res.status(201).json({
         message: 'Post added successfully!'
     });
 });
 
 app.get("/api/posts", (req, res, next) => {
-    const posts = [
-        {
-            id: "fafad213123", 
-            title: "server side post", 
-            content: "This post comes from back end server"
-        },
-        {
-            id: "aesfa124123", 
-            title: "Second server side post", 
-            content: "This post comes from back end server ..."
-        },
-    ];
-    res.status(200).json({
-        message: "Posts feteched successfully",
-        posts: posts
+
+    // Return all posts from DB
+    Post.find().then(documents => {
+        res.status(200).json({
+            message: "Posts feteched successfully",
+            posts: documents
+        });
     });
 });
 
