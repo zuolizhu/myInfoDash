@@ -41,7 +41,6 @@ export class PostsService {
         this.http.post<{message: string, postId: string}>('http://localhost:3000/api/posts', post)
         .subscribe((resData) => {
             // Update the id while creating the post
-            // the
             const id = resData.postId;
             post.id = id;
             this.posts.push(post);
@@ -55,6 +54,22 @@ export class PostsService {
             const updatedPosts = this.posts.filter(post => post.id !== postId);
             this.posts = updatedPosts;
             this.postsUpdated.next([...this.posts]);
-        })
+        });
+    }
+
+    getPost(id: string) {
+        return this.http.get<{_id: string, title: string, content: string}>('http://localhost:3000/api/posts/' + id);
+    }
+
+    updatePost(post: Post) {
+        this.http.put('http://localhost:3000/api/posts/' + post.id, post)
+        .subscribe(response => {
+            const updatedPosts = [...this.posts];
+            const oldPostIndex = updatedPosts.findIndex(p => p.id === post.id);
+            updatedPosts[oldPostIndex] = post;
+            this.posts = updatedPosts;
+            this.postsUpdated.next([...this.posts]);
+            console.log(response);
+        });
     }
 }
