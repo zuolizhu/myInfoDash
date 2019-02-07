@@ -69,7 +69,6 @@ export class PostsService {
             updatedPosts[oldPostIndex] = post;
             this.posts = updatedPosts;
             this.postsUpdated.next([...this.posts]);
-            console.log(response);
         });
     }
 }
