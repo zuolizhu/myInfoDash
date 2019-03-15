@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const postsRoutes = require('./routes/posts');
-
+const userRoutes = require('./routes/auth');
 
 
 const app = express();
@@ -16,6 +16,7 @@ mongoose.connect('mongodb+srv://goodtogo:1xivK8fPx59jyIYI@meanapp-ewu5f.mongodb.
 }).catch(() => {
     console.log("Connection failed!");
 });
+mongoose.set('useCreateIndex', true);
 
 app.use(bodyParser.json());
 
@@ -31,6 +32,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/posts', postsRoutes);
-
+app.use('/api/user', userRoutes);
 
 module.exports = app;
